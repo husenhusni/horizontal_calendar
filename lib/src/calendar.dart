@@ -78,7 +78,7 @@ class _CalendarState extends State<HorizontalCalendar> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    for (int index = 0; index < 7; index++)
+                    for (int index = 0; index < 6; index++)
                       CalendarItems(
                         index: index,
                         selectedSecondaryColor: widget.selectedSecondaryColor ??
