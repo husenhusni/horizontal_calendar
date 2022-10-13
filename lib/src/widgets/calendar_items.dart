@@ -34,7 +34,6 @@ class CalendarItems extends StatefulWidget {
 }
 
 class _CalendarItemsState extends State<CalendarItems> {
-  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     DateTime date = widget.startDate.add(Duration(days: widget.index));
@@ -42,14 +41,16 @@ class _CalendarItemsState extends State<CalendarItems> {
     int checkPastDate = date.difference(widget.initialDate).inDays;
     double width = MediaQuery.of(context).size.width;
     return InkWell(
-      onTap: widget.onDatePressed,
+      onTap: () {
+        widget.onDatePressed();
+      },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        padding: isSelected
+        padding: widget.selectedDate == date
             ? EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0)
             : EdgeInsets.all(10.0),
-        decoration: isSelected
+        decoration: widget.selectedDate == date
             ? BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,

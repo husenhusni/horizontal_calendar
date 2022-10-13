@@ -72,28 +72,33 @@ class _CalendarState extends State<HorizontalCalendar> {
         subtitle: Row(
           children: <Widget>[
             Expanded(
-              child: ListView.builder(
-                itemCount: 7,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return CalendarItems(
-                    index: index,
-                    selectedSecondaryColor: widget.selectedSecondaryColor ??
-                        Theme.of(context).primaryColor,
-                    dateNumberStyle: widget.dateNumberStyle,
-                    startDate: _startDate,
-                    initialDate: widget.initialDate ?? DateTime.now(),
-                    selectedDate: selectedDate,
-                    dateNameStyle: widget.dateNameStyle,
-                    textColor: widget.textColor ?? Colors.black45,
-                    selectedColor:
-                        widget.selectedColor ?? Theme.of(context).primaryColor,
-                    backgroundColor: widget.backgroundColor ?? Colors.white,
-                    onDatePressed: () =>
-                        onDatePressed(index, widget.initialDate),
-                  );
-                },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    for (int index = 0; index < 7; index++)
+                      CalendarItems(
+                        index: index,
+                        selectedSecondaryColor: widget.selectedSecondaryColor ??
+                            Theme.of(context).primaryColor,
+                        dateNumberStyle: widget.dateNumberStyle,
+                        startDate: _startDate,
+                        initialDate:
+                            widget.initialDate ?? new DateTime(2010, 10, 10),
+                        selectedDate: selectedDate,
+                        dateNameStyle: widget.dateNameStyle,
+                        textColor: widget.textColor ?? Colors.black45,
+                        selectedColor: widget.selectedColor ??
+                            Theme.of(context).primaryColor,
+                        backgroundColor: widget.backgroundColor ?? Colors.white,
+                        onDatePressed: () {
+                          onDatePressed(index, widget.initialDate);
+                        },
+                      )
+                  ],
+                ),
               ),
             ),
             CalendarButton(
@@ -118,7 +123,7 @@ class _CalendarState extends State<HorizontalCalendar> {
       context: context,
       initialDatePickerMode: DatePickerMode.day,
       initialDate: selectedDate,
-      firstDate: widget.initialDate ?? DateTime.now(),
+      firstDate: widget.initialDate ?? new DateTime(2010, 10, 10),
       lastDate: widget.lastDate ?? DateTime.now().add(Duration(days: 90)),
     );
   }
@@ -128,12 +133,17 @@ class _CalendarState extends State<HorizontalCalendar> {
     int diffDays = date.difference(selectedDate).inDays;
     int checkDate =
         date.difference(widget.initialDate ?? DateTime.now()).inDays;
-    if (checkDate >= 0) {
-      widget.onDateSelected(DateParser.getDate(date));
-      setState(() {
-        selectedDate = _startDate.add(Duration(days: index));
-        _startDate = _startDate.add(Duration(days: index));
-      });
-    }
+    widget.onDateSelected(date);
+    setState(() {
+      selectedDate = _startDate.add(Duration(days: index));
+      _startDate = _startDate.add(Duration(days: index));
+    });
+    // if (checkDate >= 0) {
+    //   widget.onDateSelected(DateParser.getDate(date));
+    //   setState(() {
+    //     selectedDate = _startDate.add(Duration(days: index));
+    //     _startDate = _startDate.add(Duration(days: index));
+    //   });
+    // }
   }
 }

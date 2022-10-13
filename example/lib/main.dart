@@ -34,23 +34,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title!),
       ),
       body: HorizontalCalendar(
-        date: DateTime.now().add(const Duration(days: 1)),
-        initialDate: DateTime.now().subtract(const Duration(days: 2)),
-        textColor: Colors.black,
-        backgroundColor: Colors.white,
-        selectedColor: Colors.orange,
-        showMonth: true,
-        onDateSelected: (date) {
-          if (kDebugMode) {
-            print(date.toString());
-          }
-        },
-      ),
+          selectedSecondaryColor: Color.fromARGB(255, 38, 36, 36),
+          date: DateTime.now(),
+          dateNumberStyle: 0 == 0
+              ? theme.textTheme.bodyLarge!.copyWith(color: Colors.black)
+              : theme.textTheme.headline5!
+                  .copyWith(color: theme.accentColor.withOpacity(0.5)),
+          dateNameStyle: 0 == 0
+              ? theme.textTheme.bodyLarge!.copyWith(color: Colors.black)
+              : theme.textTheme.headline4!
+                  .copyWith(color: theme.accentColor.withOpacity(0.5)),
+          textColor: theme.accentColor.withOpacity(0.5),
+          backgroundColor: Colors.white,
+          selectedColor: Color.fromARGB(95, 168, 55, 55),
+          onDateSelected: (date) {
+            print(date);
+          }),
     );
   }
 }
