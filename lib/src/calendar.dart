@@ -12,7 +12,8 @@ class HorizontalCalendar extends StatefulWidget {
     this.initialDate,
     this.lastDate,
     this.textColor,
-    this.dateTextStyle,
+    this.dateNameStyle,
+    this.dateNumberStyle,
     this.backgroundColor,
     this.selectedColor,
     this.showMonth = false,
@@ -26,7 +27,8 @@ class HorizontalCalendar extends StatefulWidget {
   final Color? backgroundColor /*!*/;
   final Color? selectedColor /*!*/;
   final bool showMonth;
-  final TextStyle? dateTextStyle;
+  final TextStyle? dateNameStyle;
+  final TextStyle? dateNumberStyle;
   final OnDateSelected onDateSelected;
 
   @override
@@ -75,10 +77,11 @@ class _CalendarState extends State<HorizontalCalendar> {
                 itemBuilder: (context, index) {
                   return CalendarItems(
                     index: index,
+                    dateNumberStyle: widget.dateNumberStyle,
                     startDate: _startDate,
                     initialDate: widget.initialDate ?? DateTime.now(),
                     selectedDate: selectedDate,
-                    dateTextStyle: widget.dateTextStyle,
+                    dateNameStyle: widget.dateNameStyle,
                     textColor: widget.textColor ?? Colors.black45,
                     selectedColor:
                         widget.selectedColor ?? Theme.of(context).primaryColor,

@@ -9,7 +9,8 @@ class CalendarItems extends StatelessWidget {
     required this.initialDate,
     required this.selectedDate,
     required this.textColor,
-    required this.dateTextStyle,
+    required this.dateNameStyle,
+    required this.dateNumberStyle,
     required this.selectedColor,
     required this.backgroundColor,
     required this.onDatePressed,
@@ -20,7 +21,8 @@ class CalendarItems extends StatelessWidget {
   final DateTime initialDate;
   final DateTime selectedDate;
   final Color textColor;
-  final TextStyle? dateTextStyle;
+  final TextStyle? dateNameStyle;
+  final TextStyle? dateNumberStyle;
   final Color selectedColor;
   final Color backgroundColor;
   final VoidCallback onDatePressed;
@@ -43,7 +45,7 @@ class CalendarItems extends StatelessWidget {
           children: <Widget>[
             Text(
               DateParser.getDayOfWeek(date),
-              style: this.dateTextStyle ??
+              style: this.dateNameStyle ??
                   Theme.of(context).textTheme.bodyText2!.copyWith(
                         color: diffDays != 0
                             ? checkPastDate >= 0
@@ -56,7 +58,7 @@ class CalendarItems extends StatelessWidget {
             SizedBox(height: 2.0),
             Text(
               DateParser.getDayOfMonth(date),
-              style: this.dateTextStyle ??
+              style: this.dateNumberStyle ??
                   Theme.of(context).textTheme.bodyText2!.copyWith(
                         color: diffDays != 0
                             ? checkPastDate >= 0
