@@ -9,6 +9,7 @@ class CalendarItems extends StatelessWidget {
     required this.initialDate,
     required this.selectedDate,
     required this.textColor,
+    required this.dateTextStyle,
     required this.selectedColor,
     required this.backgroundColor,
     required this.onDatePressed,
@@ -19,6 +20,7 @@ class CalendarItems extends StatelessWidget {
   final DateTime initialDate;
   final DateTime selectedDate;
   final Color textColor;
+  final TextStyle? dateTextStyle;
   final Color selectedColor;
   final Color backgroundColor;
   final VoidCallback onDatePressed;
@@ -41,27 +43,29 @@ class CalendarItems extends StatelessWidget {
           children: <Widget>[
             Text(
               DateParser.getDayOfWeek(date),
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    color: diffDays != 0
-                        ? checkPastDate >= 0
-                            ? textColor
-                            : Colors.grey[300]
-                        : Colors.white,
-                    fontSize: 10.0,
-                  ),
+              style: this.dateTextStyle ??
+                  Theme.of(context).textTheme.bodyText2!.copyWith(
+                        color: diffDays != 0
+                            ? checkPastDate >= 0
+                                ? textColor
+                                : Colors.grey[300]
+                            : Colors.white,
+                        fontSize: 10.0,
+                      ),
             ),
             SizedBox(height: 2.0),
             Text(
               DateParser.getDayOfMonth(date),
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    color: diffDays != 0
-                        ? checkPastDate >= 0
-                            ? textColor
-                            : Colors.grey[300]
-                        : Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: this.dateTextStyle ??
+                  Theme.of(context).textTheme.bodyText2!.copyWith(
+                        color: diffDays != 0
+                            ? checkPastDate >= 0
+                                ? textColor
+                                : Colors.grey[300]
+                            : Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
             ),
           ],
         ),
