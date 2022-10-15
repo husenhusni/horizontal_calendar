@@ -107,7 +107,7 @@ class _CalendarState extends State<HorizontalCalendar> {
               onCalendarPressed: () async {
                 DateTime? date = await selectDate();
                 if (date != null) {
-                  widget.onDateSelected(DateParser.getDate(date));
+                  widget.onDateSelected(date);
                   setState(() => selectedDate = date);
                 }
               },
